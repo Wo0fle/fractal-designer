@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://5bviifyouljp"]
+
+[ext_resource type="Script" path="res://scenes/mandelbrot.gd" id="1_ddj44"]
+[ext_resource type="Shader" path="res://shaders/mandelbrot.gdshader" id="1_ghugf"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
+shader = ExtResource("1_ghugf")
+shader_parameter/zoom = 4.0
+shader_parameter/center_x = 0.0
+shader_parameter/center_y = 0.0
+shader_parameter/max_iterations = 20
+shader_parameter/far_color = Vector3(0, 0, 0)
+shader_parameter/close_color = Vector3(0, 73, 255)
+
+[node name="mandelbrot" type="Node2D"]
+script = ExtResource("1_ddj44")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ycy42")
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(15, 15)
