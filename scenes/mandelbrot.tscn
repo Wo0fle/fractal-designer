@@ -5,12 +5,15 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
 shader = ExtResource("1_ghugf")
+shader_parameter/initial_z = Vector2(0, 0)
+shader_parameter/exponent = 2.0
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
 shader_parameter/center_y = 0.0
-shader_parameter/max_iterations = 20
-shader_parameter/far_color = Vector3(0, 0, 0)
-shader_parameter/close_color = Vector3(0, 73, 255)
+shader_parameter/max_iterations = 500
+shader_parameter/far_color = Vector3(56, 95, 200)
+shader_parameter/close_color = Vector3(162, 240, 240)
+shader_parameter/amount_of_colors = 10
 
 [node name="mandelbrot" type="Node2D"]
 script = ExtResource("1_ddj44")

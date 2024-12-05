@@ -11,8 +11,13 @@ config_version=5
 [application]
 
 config/name="fractalscape"
+run/main_scene="res://scenes/mandelbrot.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/mode=2
 
 [rendering]
 
