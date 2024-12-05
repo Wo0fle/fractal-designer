@@ -1,6 +1,3 @@
-shader_type canvas_item;
-
-uniform vec2 initial_z = vec2(0.0);
 uniform float exponent = 2.0;
 
 uniform float zoom = 4.0;
@@ -11,8 +8,7 @@ uniform int max_iterations = 500;
 
 uniform vec3 far_color = vec3(56, 95, 200);
 uniform vec3 close_color = vec3(162, 240, 240);
-uniform int amount_of_colors = 10;
-
+uniform int amount_of_colors = 20;
 
 vec3 color_getter(int cur_iteration) {
 	vec3 far = far_color/255.0;
@@ -26,12 +22,7 @@ vec3 color_getter(int cur_iteration) {
 	return cur_color;
 }
 
-void fragment() {
-	vec2 uv = UV - 0.5;
-	vec2 c = uv * zoom + vec2(center_x, -center_y);
-	
-	vec2 z = vec2(initial_z.x, -initial_z.y);
-	
+vec4 draw(vec2 z, vec2 c) {
 	int iterations = 0;
 	
 	for (int i = 0; i < max_iterations; i++) {
@@ -44,8 +35,8 @@ void fragment() {
 	}
 	
 	if (iterations == max_iterations) {
-		COLOR = vec4(0,0,0,1);
+		return vec4(0,0,0,1);
 	} else {
-		COLOR = vec4(color_getter(iterations), 1.0);
+		return vec4(color_getter(iterations), 1.0);
 	}
 }

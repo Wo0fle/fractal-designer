@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhlgkm0cdgaa4"]
+
+[ext_resource type="Shader" path="res://shaders/cset.gdshader" id="1_kmil1"]
+[ext_resource type="Shader" path="res://shaders/zset.gdshader" id="2_d3a85"]
+
+[sub_resource type="GDScript" id="GDScript_tlstf"]
+script/source = "extends Node2D
+
+
+#var time = 0.0
+#var power = 0.1
+@onready var c_set = $\"c-set\"
+
+#var initial_zoom = 4.0
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+#	time += delta
+#	power += delta + 0.001
+#	var zoom = initial_zoom / pow(time, power)
+#	c_set.get_material().set_shader_parameter(\"zoom\", zoom)
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
+shader = ExtResource("1_kmil1")
+shader_parameter/exponent = 2.0
+shader_parameter/zoom = 4.0
+shader_parameter/center_x = 0.0
+shader_parameter/center_y = 0.0
+shader_parameter/max_iterations = 500
+shader_parameter/far_color = Vector3(56, 95, 200)
+shader_parameter/close_color = Vector3(162, 240, 240)
+shader_parameter/amount_of_colors = 20
+shader_parameter/initial_z = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y568x"]
+shader = ExtResource("2_d3a85")
+shader_parameter/exponent = 2.0
+shader_parameter/zoom = 4.0
+shader_parameter/center_x = 0.0
+shader_parameter/center_y = 0.0
+shader_parameter/max_iterations = 500
+shader_parameter/far_color = Vector3(56, 95, 200)
+shader_parameter/close_color = Vector3(162, 240, 240)
+shader_parameter/amount_of_colors = 20
+shader_parameter/initial_c = Vector2(-1.15, 0.26)
+
+[node name="viewer" type="Node2D"]
+script = SubResource("GDScript_tlstf")
+
+[node name="c-set" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ycy42")
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(15, 15)
+
+[node name="z-set" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_y568x")
+offset_left = 600.0
+offset_right = 640.0
+offset_bottom = 40.0
+scale = Vector2(15, 15)
