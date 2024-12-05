@@ -57,7 +57,7 @@ scale = Vector2(15, 15)
 
 [node name="z-set" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_y568x")
-offset_left = 600.0
-offset_right = 640.0
+offset_left = 605.0
+offset_right = 645.0
 offset_bottom = 40.0
 scale = Vector2(15, 15)
