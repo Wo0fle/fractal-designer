@@ -7,19 +7,13 @@
 script/source = "extends Node2D
 
 
-#var time = 0.0
-#var power = 0.1
 @onready var c_set = $\"c-set\"
+@onready var z_set = $\"z-set\"
+#c_set.get_material().set_shader_parameter(\"zoom\", zoom)
 
-#var initial_zoom = 4.0
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _ready():
+	# add sliders that change the parameters ??????
 	pass
-#	time += delta
-#	power += delta + 0.001
-#	var zoom = initial_zoom / pow(time, power)
-#	c_set.get_material().set_shader_parameter(\"zoom\", zoom)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
