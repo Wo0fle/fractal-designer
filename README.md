@@ -1,6 +1,6 @@
 # Fractalscape
 
-### Explore fractals with this highly customizable and interactive (website? i do want it to be web based)!
+### Explore fractals with this highly customizable and interactive web app!
 
 link goes here eventually
 
@@ -25,4 +25,5 @@ icon goes here eventually
 * parametrize exponent
 * negative/complex exponents (will require something other than the normal escape time algorithm)
 * smooth rotation between viewing the z, c, and x sets (will require lots of crazy vector math probably)
-* more color options (more color stops, custom color for points inside the set, )
+* more color options (more color stops, custom color for points inside the set, anything else I can think of)
+* add more types of fractals!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
