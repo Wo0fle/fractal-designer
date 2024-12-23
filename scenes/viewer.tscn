@@ -7,9 +7,9 @@
 script/source = "extends Node2D
 
 
-@onready var c_set = $\"c-set\"
-@onready var z_set = $\"z-set\"
-#c_set.get_material().set_shader_parameter(\"zoom\", zoom)
+# @onready var c_set = $\"c-set\"
+# @onready var z_set = $\"z-set\"
+# c_set.get_material().set_shader_parameter(\"zoom\", zoom)
 
 func _ready():
 	# add sliders that change the parameters ??????
@@ -18,11 +18,12 @@ func _ready():
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
 shader = ExtResource("1_kmil1")
-shader_parameter/exponent = 2.0
+shader_parameter/exponent = Vector2(2, 0)
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
 shader_parameter/center_y = 0.0
 shader_parameter/max_iterations = 500
+shader_parameter/in_set_color = Vector3(0, 0, 0)
 shader_parameter/far_color = Vector3(56, 95, 200)
 shader_parameter/close_color = Vector3(162, 240, 240)
 shader_parameter/amount_of_colors = 20
@@ -35,6 +36,7 @@ shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
 shader_parameter/center_y = 0.0
 shader_parameter/max_iterations = 500
+shader_parameter/in_set_color = Vector3(0, 0, 0)
 shader_parameter/far_color = Vector3(56, 95, 200)
 shader_parameter/close_color = Vector3(162, 240, 240)
 shader_parameter/amount_of_colors = 20
@@ -50,6 +52,7 @@ offset_bottom = 40.0
 scale = Vector2(15, 15)
 
 [node name="z-set" type="ColorRect" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_y568x")
 offset_left = 605.0
 offset_right = 645.0

@@ -1,4 +1,4 @@
-uniform float exponent = 2.0;
+uniform vec2 exponent = vec2(2.0,0.0);
 
 uniform float zoom = 4.0;
 uniform float center_x = 0.0;
@@ -6,6 +6,7 @@ uniform float center_y = 0.0;
 
 uniform int max_iterations = 500;
 
+uniform vec3 in_set_color = vec3(0);
 uniform vec3 far_color = vec3(56, 95, 200);
 uniform vec3 close_color = vec3(162, 240, 240);
 uniform int amount_of_colors = 20;
@@ -22,11 +23,27 @@ vec3 color_getter(int cur_iteration) {
 	return cur_color;
 }
 
+float better_pow(float base, float power) {
+	if (power > 0.0) {
+		return pow(base, power);
+	} else if (power == 0.0) {
+		return 1.0;
+	} else {
+		return (1.0/pow(base, power));
+	}
+}
+
 vec4 draw(vec2 z, vec2 c) {
 	int iterations = 0;
 	
 	for (int i = 0; i < max_iterations; i++) {
-		z = vec2(pow(pow(z.x,2.0)+pow(z.y,2.0), exponent/2.0)*cos(exponent*atan(z.y,z.x)), pow(pow(z.x,2.0)+pow(z.y,2.0), exponent/2.0)*sin(exponent*atan(z.y,z.x))) + c;
+		float r = length(z);
+		float theta = atan(z.y,z.x);
+		
+		z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos(exponent.x*theta+exponent.y*log(r)), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*log(r))));
+		// this math is supposedly correct but it just doesn't work
+		// america explain
+		// WHY IS EVERYTHING INSIDE THE SET
 		
 		if (length(z) > 2.0) {
 			break;
@@ -35,7 +52,7 @@ vec4 draw(vec2 z, vec2 c) {
 	}
 	
 	if (iterations == max_iterations) {
-		return vec4(0,0,0,1);
+		return vec4(in_set_color/255.0, 1.0);
 	} else {
 		return vec4(color_getter(iterations), 1.0);
 	}

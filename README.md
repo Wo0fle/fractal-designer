@@ -1,4 +1,4 @@
-# Fractalscape
+# Fractal Designer
 
 ### Explore fractals with this highly customizable and interactive web app!
 
