@@ -23,7 +23,7 @@ icon goes here eventually
 * zoom, translate, and rotate viewport, and change variables from inside the program (duh)
 * parametrize variables from inside the program (duh)
 * parametrize exponent
-* negative/complex exponents (will require something other than the normal escape time algorithm)
+* implement Lyapunov exponent instead of escape time algorithm
 * smooth rotation between viewing the z, c, and x sets (will require lots of crazy vector math probably)
 * more color options (more color stops, custom color for points inside the set, anything else I can think of)
 * add more types of fractals!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
