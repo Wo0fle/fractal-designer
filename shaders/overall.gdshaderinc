@@ -40,12 +40,12 @@ vec4 draw(vec2 z, vec2 c) {
 		float r = length(z);
 		float theta = atan(z.y,z.x);
 		
-		z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos(exponent.x*theta+exponent.y*log(r)), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*log(r))));
-		// this math is supposedly correct but it just doesn't work
-		// america explain
-		// WHY IS EVERYTHING INSIDE THE SET
+		//z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos((exponent.x*theta)+(exponent.y*log(r))), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*log(r)))) + c;
+		// the issue is with the "log(r)" because everything works "fine" without it
+		z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos((exponent.x*theta)+(exponent.y*(r))), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*(r)))) + c;
+		// obv it's incorrect but it does generate *something*, unlike the "correct" formula where everything is included in the set
 		
-		if (length(z) > 2.0) {
+		if (r > 2.0) {
 			break;
 		}
 		iterations++;
