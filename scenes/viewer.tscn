@@ -32,7 +32,7 @@ shader_parameter/initial_z = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y568x"]
 shader = ExtResource("2_d3a85")
-shader_parameter/exponent = 2.0
+shader_parameter/exponent = Vector2(2, 0)
 shader_parameter/escape_value = 2.0
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
@@ -54,7 +54,6 @@ offset_bottom = 40.0
 scale = Vector2(15, 15)
 
 [node name="z-set" type="ColorRect" parent="."]
-visible = false
 material = SubResource("ShaderMaterial_y568x")
 offset_left = 605.0
 offset_right = 645.0
