@@ -19,6 +19,7 @@ func _ready():
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
 shader = ExtResource("1_kmil1")
 shader_parameter/exponent = Vector2(2, 0)
+shader_parameter/escape_value = 2.0
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
 shader_parameter/center_y = 0.0
@@ -32,6 +33,7 @@ shader_parameter/initial_z = Vector2(0, 0)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y568x"]
 shader = ExtResource("2_d3a85")
 shader_parameter/exponent = 2.0
+shader_parameter/escape_value = 2.0
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
 shader_parameter/center_y = 0.0

@@ -1,4 +1,5 @@
 uniform vec2 exponent = vec2(2.0,0.0);
+uniform float escape_value = 2.0;
 
 uniform float zoom = 4.0;
 uniform float center_x = 0.0;
@@ -40,12 +41,14 @@ vec4 draw(vec2 z, vec2 c) {
 		float r = length(z);
 		float theta = atan(z.y,z.x);
 		
-		//z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos((exponent.x*theta)+(exponent.y*log(r))), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*log(r)))) + c;
-		// the issue is with the "log(r)" because everything works "fine" without it
-		z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos((exponent.x*theta)+(exponent.y*(r))), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*(r)))) + c;
-		// obv it's incorrect but it does generate *something*, unlike the "correct" formula where everything is included in the set
+		if (r == 0.0) {
+			z = c;
+			// why does this edge case exist...
+		} else {
+			z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos((exponent.x*theta)+(exponent.y*log(r))), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*log(r)))) + c;
+		}
 		
-		if (r > 2.0) {
+		if (r > escape_value) {
 			break;
 		}
 		iterations++;
