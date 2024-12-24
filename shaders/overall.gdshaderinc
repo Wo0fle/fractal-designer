@@ -1,5 +1,4 @@
-uniform vec2 exponent = vec2(2.0,0.0);
-uniform float escape_value = 2.0;
+uniform float escape_value = 256.0;
 
 uniform float zoom = 4.0;
 uniform float center_x = 0.0;
@@ -10,7 +9,7 @@ uniform int max_iterations = 500;
 uniform vec3 in_set_color = vec3(0);
 uniform vec3 far_color = vec3(56, 95, 200);
 uniform vec3 close_color = vec3(162, 240, 240);
-uniform int amount_of_colors = 20;
+uniform int amount_of_colors = 30;
 
 vec3 color_getter(int cur_iteration) {
 	vec3 far = far_color/255.0;
@@ -34,7 +33,7 @@ float better_pow(float base, float power) {
 	}
 }
 
-vec4 draw(vec2 z, vec2 c) {
+vec4 draw(vec2 z, vec2 c, vec2 x) {
 	int iterations = 0;
 	
 	for (int i = 0; i < max_iterations; i++) {
@@ -45,7 +44,7 @@ vec4 draw(vec2 z, vec2 c) {
 			z = c;
 			// why does this edge case exist...
 		} else {
-			z = vec2(better_pow(r,exponent.x)*exp(-exponent.y*theta)*cos((exponent.x*theta)+(exponent.y*log(r))), better_pow(r,exponent.x)*exp(-exponent.y*theta)*sin((exponent.x*theta)+(exponent.y*log(r)))) + c;
+			z = vec2(better_pow(r,x.x)*exp(-x.y*theta)*cos((x.x*theta)+(x.y*log(r))), better_pow(r,x.x)*exp(-x.y*theta)*sin((x.x*theta)+(x.y*log(r)))) + c;
 		}
 		
 		if (r > escape_value) {

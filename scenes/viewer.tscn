@@ -1,25 +1,48 @@
-[gd_scene load_steps=6 format=3 uid="uid://dhlgkm0cdgaa4"]
+[gd_scene load_steps=8 format=3 uid="uid://dhlgkm0cdgaa4"]
 
 [ext_resource type="Shader" path="res://shaders/cset.gdshader" id="1_kmil1"]
+[ext_resource type="Shader" path="res://shaders/xset.gdshader" id="1_yd5bd"]
 [ext_resource type="Shader" path="res://shaders/zset.gdshader" id="2_d3a85"]
 
 [sub_resource type="GDScript" id="GDScript_tlstf"]
 script/source = "extends Node2D
 
 
-# @onready var c_set = $\"c-set\"
-# @onready var z_set = $\"z-set\"
-# c_set.get_material().set_shader_parameter(\"zoom\", zoom)
+@onready var c_set = $\"fractals/c-set\"
+@onready var z_set = $\"fractals/z-set\"
+@onready var x_set = $\"fractals/x-set\"
+
+var time = 0.0
+var power = 0.1
 
 func _ready():
-	# add sliders that change the parameters ??????
-	pass
+	get_viewport().connect(\"size_changed\", _on_viewport_size_changed)
+	_on_viewport_size_changed()
+
+func _on_viewport_size_changed():
+	c_set.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
+	z_set.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
+	x_set.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
+
+func _process(delta):
+	time += delta
+	
+	# mess around with values over time and see what happens
+#	var real_z = -1.0+(time/10)
+#	var imaginary_z = 1.0-(time/10)
+#	var real_c = -1.20+(time/10)
+#	var imaginary_c = 0.30+(time/10)
+	var real_x = -2#3.0-(time/10)
+	var imaginary_x = 0#-1.0+(time/10)
+
+#	c_set.get_material().set_shader_parameter(\"initial_z\", Vector2(real_z, imaginary_z))
+#	x_set.get_material().set_shader_parameter(\"c_value\", Vector2(real_c, imaginary_c))
+	c_set.get_material().set_shader_parameter(\"x_value\", Vector2(real_x, imaginary_x))
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
-shader = ExtResource("1_kmil1")
-shader_parameter/exponent = Vector2(2, 0)
-shader_parameter/escape_value = 2.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2llf7"]
+shader = ExtResource("1_yd5bd")
+shader_parameter/escape_value = 256.0
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
 shader_parameter/center_y = 0.0
@@ -27,13 +50,14 @@ shader_parameter/max_iterations = 500
 shader_parameter/in_set_color = Vector3(0, 0, 0)
 shader_parameter/far_color = Vector3(56, 95, 200)
 shader_parameter/close_color = Vector3(162, 240, 240)
-shader_parameter/amount_of_colors = 20
+shader_parameter/amount_of_colors = 30
 shader_parameter/initial_z = Vector2(0, 0)
+shader_parameter/c_value = Vector2(1, 0)
+shader_parameter/viewport_size = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_y568x"]
 shader = ExtResource("2_d3a85")
-shader_parameter/exponent = Vector2(2, 0)
-shader_parameter/escape_value = 2.0
+shader_parameter/escape_value = 256.0
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
 shader_parameter/center_y = 0.0
@@ -42,20 +66,52 @@ shader_parameter/in_set_color = Vector3(0, 0, 0)
 shader_parameter/far_color = Vector3(56, 95, 200)
 shader_parameter/close_color = Vector3(162, 240, 240)
 shader_parameter/amount_of_colors = 20
-shader_parameter/initial_c = Vector2(-1.15, 0.26)
+shader_parameter/c_value = Vector2(-1.15, 0.26)
+shader_parameter/x_value = Vector2(2, 0)
+shader_parameter/viewport_size = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycy42"]
+shader = ExtResource("1_kmil1")
+shader_parameter/escape_value = 256.0
+shader_parameter/zoom = 4.0
+shader_parameter/center_x = 0.0
+shader_parameter/center_y = 0.0
+shader_parameter/max_iterations = 500
+shader_parameter/in_set_color = Vector3(0, 0, 0)
+shader_parameter/far_color = Vector3(56, 95, 200)
+shader_parameter/close_color = Vector3(162, 240, 240)
+shader_parameter/amount_of_colors = 30
+shader_parameter/initial_z = Vector2(0, 0)
+shader_parameter/x_value = Vector2(2, 0)
+shader_parameter/viewport_size = null
 
 [node name="viewer" type="Node2D"]
 script = SubResource("GDScript_tlstf")
 
-[node name="c-set" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_ycy42")
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(15, 15)
+[node name="fractals" type="CanvasLayer" parent="."]
 
-[node name="z-set" type="ColorRect" parent="."]
+[node name="x-set" type="ColorRect" parent="fractals"]
+visible = false
+material = SubResource("ShaderMaterial_2llf7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="z-set" type="ColorRect" parent="fractals"]
+visible = false
 material = SubResource("ShaderMaterial_y568x")
-offset_left = 605.0
-offset_right = 645.0
-offset_bottom = 40.0
-scale = Vector2(15, 15)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="c-set" type="ColorRect" parent="fractals"]
+material = SubResource("ShaderMaterial_ycy42")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
