@@ -56,7 +56,8 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 		
 		if (r == 0.0) {
 			z = c;
-		} else { // z_n+1 = z_n^x + c
+		} else { // z_n+1 = (|Re(z_n)| + i|Im(z_n)|)^x + c
+			z = vec2(abs(z.x), abs(z.y));
 			float theta = atan(z.y,z.x);
 			if (use_lyapunov) { le += log(r); }
 			z = vec2(
