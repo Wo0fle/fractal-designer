@@ -26,4 +26,4 @@ icon goes here eventually
 * implement Lyapunov exponent instead of escape time algorithm
 * smooth rotation between viewing the z, c, and x sets (will require lots of crazy vector math probably)
 * more color options (more color stops mainly, but also anything else I can think of)
-* custom fractal equations (with presets such as Burning Ships, [Payne's Bowls](https://www.reddit.com/r/math/s/WsDKkJfor6), etc.)
+* custom fractal equations (with presets such as Burning Ships, [Payne's Horizons](https://www.reddit.com/r/math/s/WsDKkJfor6), etc.)
