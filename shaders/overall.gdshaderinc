@@ -23,16 +23,6 @@ vec3 color_getter(int cur_iteration) {
 	return cur_color;
 }
 
-float better_pow(float base, float power) {
-	if (power > 0.0) {
-		return pow(base, power);
-	} else if (power == 0.0) {
-		return 1.0;
-	} else {
-		return (1.0/pow(base, power));
-	}
-}
-
 vec4 draw(vec2 z, vec2 c, vec2 x) {
 	int iterations = 0;
 	
@@ -42,9 +32,11 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 		
 		if (r == 0.0) {
 			z = c;
-			// why does this edge case exist...
 		} else {
-			z = vec2(better_pow(r,x.x)*exp(-x.y*theta)*cos((x.x*theta)+(x.y*log(r))), better_pow(r,x.x)*exp(-x.y*theta)*sin((x.x*theta)+(x.y*log(r)))) + c;
+			z = vec2(
+				pow(r,x.x)*exp(-x.y*theta)*cos((x.x*theta)+(x.y*log(r))),
+				pow(r,x.x)*exp(-x.y*theta)*sin((x.x*theta)+(x.y*log(r)))
+			) + c;
 		}
 		
 		if (r > escape_value) {
