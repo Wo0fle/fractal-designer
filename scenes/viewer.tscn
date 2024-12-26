@@ -22,42 +22,33 @@ func _on_viewport_size_changed():
 	burningships.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
 
 func _process(delta):
-	pass
-#	time += delta
-	
+#	pass
+	time += delta
+
 	# mess around with values over time and see what happens
-#	var real_z = -1.0+(time/10)
-#	var imaginary_z = 1.0-(time/10)
+	var real_z = 1.0-(time/10)
+	var imaginary_z = -1.0+(time/10)
 #	var real_c = -1.20+(time/10)
 #	var imaginary_c = 0.30+(time/10)
-#	var real_x = 2#3.0-(time/10)
-#	var imaginary_x = 0#-1.0+(time/10)
-
-#	c_set.get_material().set_shader_parameter(\"initial_z\", Vector2(real_z, imaginary_z))
-#	x_set.get_material().set_shader_parameter(\"c_value\", Vector2(real_c, imaginary_c))
-#	c_set.get_material().set_shader_parameter(\"x_value\", Vector2(real_x, imaginary_x))
+	var real_x = 1.0+(time/10)
+	var imaginary_x = 1.0-(time/10)
+	
+	if real_z < 0.0:
+		real_z = 0.0
+		imaginary_z = 0.0
+		real_x = 2.0
+		imaginary_x = 0.0
+	
+	burningships.get_material().set_shader_parameter(\"initial_z\", Vector2(real_z, imaginary_z))
+#	burningships.get_material().set_shader_parameter(\"c_value\", Vector2(real_c, imaginary_c))
+	burningships.get_material().set_shader_parameter(\"x_value\", Vector2(real_x, imaginary_x))
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3t2ld"]
 shader = ExtResource("4_twjwl")
-shader_parameter/var_on_pixels = 1
-shader_parameter/zoom = 4.0
-shader_parameter/center_x = 0.0
-shader_parameter/center_y = 0.0
-shader_parameter/use_lyapunov = false
-shader_parameter/max_iterations = 500
-shader_parameter/escape_value = 256.0
-shader_parameter/in_set_color = Vector3(0, 0, 0)
-shader_parameter/far_color = Vector3(56, 95, 200)
-shader_parameter/close_color = Vector3(162, 240, 240)
-shader_parameter/amount_of_colors = 30
 shader_parameter/initial_z = Vector2(0, 0)
 shader_parameter/c_value = Vector2(-1.15, 0.26)
 shader_parameter/x_value = Vector2(2, 0)
-shader_parameter/viewport_size = Vector2(0, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ecohy"]
-shader = ExtResource("2_1tui1")
 shader_parameter/var_on_pixels = true
 shader_parameter/zoom = 4.0
 shader_parameter/center_x = 0.0
@@ -69,9 +60,24 @@ shader_parameter/in_set_color = Vector3(0, 0, 0)
 shader_parameter/far_color = Vector3(56, 95, 200)
 shader_parameter/close_color = Vector3(162, 240, 240)
 shader_parameter/amount_of_colors = 30
+shader_parameter/viewport_size = Vector2(0, 0)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ecohy"]
+shader = ExtResource("2_1tui1")
 shader_parameter/initial_z = Vector2(0, 0)
-shader_parameter/c_value = Vector2(-1.15, 0.26)
+shader_parameter/c_value = Vector2(0.3, -0.38)
 shader_parameter/x_value = Vector2(2, 0)
+shader_parameter/var_on_pixels = true
+shader_parameter/zoom = 4.0
+shader_parameter/center_x = 0.0
+shader_parameter/center_y = 0.0
+shader_parameter/use_lyapunov = false
+shader_parameter/max_iterations = 500
+shader_parameter/escape_value = 256.0
+shader_parameter/in_set_color = Vector3(0, 0, 0)
+shader_parameter/far_color = Vector3(56, 95, 200)
+shader_parameter/close_color = Vector3(162, 240, 240)
+shader_parameter/amount_of_colors = 30
 shader_parameter/viewport_size = null
 
 [node name="viewer" type="Node2D"]
