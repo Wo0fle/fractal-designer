@@ -13,7 +13,6 @@ tutorial on how to use goes here eventually
 * Inspired by: 
   * [Mandelbrot's Evil Twin - 2swap](https://www.youtube.com/watch?v=Ed1gsyxxwM0)
   * [HTML5 Fractal Playground - Vivian River](https://vivianriver.github.io/HTML5_Fractal_Playground/)
-  * [Sounds of the Mandelbrot Set - CodeParade](https://www.youtube.com/watch?v=GiAj9WW1OfQ)
 
 <br>
 
