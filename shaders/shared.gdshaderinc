@@ -1,8 +1,8 @@
 uniform bvec3 var_on_pixels = bvec3(true, false, false);
 
 uniform float zoom = 4.0;
-uniform float center_x = 0.0;
-uniform float center_y = 0.0;
+uniform vec2 center = vec2(0.0);
+uniform float rotation = 0.0;
 
 uniform bool use_lyapunov = false;
 uniform int max_iterations = 500;

@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform vec2 initial_z = vec2(0.0);
 uniform vec2 c_value = vec2(0.3, -0.38);
-uniform vec2 x_value = vec2(2.0,0.0);
+uniform vec2 x_value = vec2(0.0,1.0);
 
 #include "shared.gdshaderinc"
 
@@ -17,13 +17,12 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 		
 		if (r == 0.0) {
 			z = c;
-		} else { // z_n+1 = (|Re(z_n)| + i|Im(z_n)|)^x + c
-			z = vec2(abs(z.x), abs(z.y));
-			float theta = atan(z.y,z.x);
+		} else { // z_n+1 = x^z_n + c
+			float theta = atan(x.y,x.x);
 			if (use_lyapunov) { le += log(r); }
 			z = vec2(
-				pow(r,x.x)*exp(-x.y*theta)*cos((x.x*theta)+(x.y*log(r))),
-				pow(r,x.x)*exp(-x.y*theta)*sin((x.x*theta)+(x.y*log(r)))
+				pow(length(x),z.x)*exp(-z.y*theta)*cos((z.x*theta)+(z.y*log(length(x)))),
+				pow(length(x),z.x)*exp(-z.y*theta)*sin((z.x*theta)+(z.y*log(length(x))))
 			) + c;
 		}
 		

@@ -44,13 +44,13 @@ void fragment() {
 	vec2 uv = FRAGCOORD.xy - viewport_size/2.0;
 	
 	if (var_on_pixels[1] == true) {
-		vec2 z = uv * zoom / 1000.0 + vec2(center_x, -center_y);
+		vec2 z = uv * zoom / 1000.0 + vec2(center.x, -center.y);
 		COLOR = draw(z, c_value, x_value);
 	} else if (var_on_pixels[2] == true) {
-		vec2 x = uv * zoom / 1000.0 + vec2(center_x, -center_y);
+		vec2 x = uv * zoom / 1000.0 + vec2(center.x, -center.y);
 		COLOR = draw(initial_z, c_value, x);
 	} else {
-		vec2 c = uv * zoom / 1000.0 + vec2(center_x, -center_y);
+		vec2 c = uv * zoom / 1000.0 + vec2(center.x, -center.y);
 		COLOR = draw(initial_z, c, x_value);
 	}
 }
