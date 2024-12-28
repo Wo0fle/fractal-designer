@@ -1,4 +1,4 @@
-uniform bvec3 var_on_pixels = bvec3(true, false, false);
+uniform int var_on_pixels = 0;
 
 uniform float zoom = 4.0;
 uniform vec2 center = vec2(0.0);

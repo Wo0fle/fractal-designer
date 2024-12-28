@@ -13,7 +13,6 @@ script/source = "extends Node2D
 @onready var payneshorizons = $\"fractals/payneshorizons\"
 
 var time = 0.0
-var power = 0.1
 
 func _ready():
 	get_viewport().connect(\"size_changed\", _on_viewport_size_changed)
@@ -25,20 +24,15 @@ func _on_viewport_size_changed():
 	payneshorizons.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
 
 func _process(delta):
-#	pass
+	pass
 	time += delta
-
-	# mess around with values over time and see what happens
-	var real_z = 1.0-(time/10)
-	var imaginary_z = -1.0+(time/10)
-#	var real_c = -1.20+(time/10)
-#	var imaginary_c = 0.30+(time/10)
-	var real_x = -1.0+(time/10)
-	var imaginary_x = 2.0-(time/10)
-
-	payneshorizons.get_material().set_shader_parameter(\"initial_z\", Vector2(real_z, imaginary_z))
-#	burningships.get_material().set_shader_parameter(\"c_value\", Vector2(real_c, imaginary_c))
-	payneshorizons.get_material().set_shader_parameter(\"x_value\", Vector2(real_x, imaginary_x))
+	
+	var zoom = 200/pow(time, sqrt(time/15))
+	var some_vector2 = Vector2(-2+time/10,1-time/10)
+	
+#	payneshorizons.get_material().set_shader_parameter(\"max_iterations\", 20/pow(zoom, 0.5))
+	payneshorizons.get_material().set_shader_parameter(\"zoom\", zoom)
+	payneshorizons.get_material().set_shader_parameter(\"c_value\", some_vector2)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3t2ld"]
@@ -46,7 +40,7 @@ shader = ExtResource("4_twjwl")
 shader_parameter/initial_z = Vector2(0, 0)
 shader_parameter/c_value = Vector2(-1.15, 0.26)
 shader_parameter/x_value = Vector2(2, 0)
-shader_parameter/var_on_pixels = true
+shader_parameter/var_on_pixels = 0
 shader_parameter/zoom = 4.0
 shader_parameter/center = Vector2(0, 0)
 shader_parameter/rotation = 0.0
@@ -64,7 +58,7 @@ shader = ExtResource("2_1tui1")
 shader_parameter/initial_z = Vector2(0, 0)
 shader_parameter/c_value = Vector2(0.3, -0.38)
 shader_parameter/x_value = Vector2(2, 0)
-shader_parameter/var_on_pixels = true
+shader_parameter/var_on_pixels = 0
 shader_parameter/zoom = 4.0
 shader_parameter/center = Vector2(0, 0)
 shader_parameter/rotation = 0.0
@@ -82,17 +76,17 @@ shader = ExtResource("3_p1yma")
 shader_parameter/initial_z = Vector2(0, 0)
 shader_parameter/c_value = Vector2(0.3, -0.38)
 shader_parameter/x_value = Vector2(0, 1)
-shader_parameter/var_on_pixels = true
+shader_parameter/var_on_pixels = 1
 shader_parameter/zoom = 4.0
 shader_parameter/center = Vector2(0, 0)
 shader_parameter/rotation = 0.0
 shader_parameter/use_lyapunov = false
-shader_parameter/max_iterations = 500
+shader_parameter/max_iterations = 200
 shader_parameter/escape_value = 256.0
 shader_parameter/in_set_color = Vector3(0, 0, 0)
 shader_parameter/far_color = Vector3(56, 95, 200)
 shader_parameter/close_color = Vector3(162, 240, 240)
-shader_parameter/amount_of_colors = 30
+shader_parameter/amount_of_colors = 10
 shader_parameter/viewport_size = null
 
 [node name="viewer" type="Node2D"]
@@ -110,7 +104,6 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="burningships" type="ColorRect" parent="fractals"]
-visible = false
 material = SubResource("ShaderMaterial_ecohy")
 anchors_preset = 15
 anchor_right = 1.0
@@ -120,7 +113,6 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="payneshorizons" type="ColorRect" parent="fractals"]
-visible = false
 material = SubResource("ShaderMaterial_jl1gs")
 anchors_preset = 15
 anchor_right = 1.0

@@ -43,10 +43,10 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 void fragment() {
 	vec2 uv = FRAGCOORD.xy - viewport_size/2.0;
 	
-	if (var_on_pixels[1] == true) {
+	if (var_on_pixels == 1) {
 		vec2 z = uv * zoom / 1000.0 + vec2(center.x, -center.y);
 		COLOR = draw(z, c_value, x_value);
-	} else if (var_on_pixels[2] == true) {
+	} else if (var_on_pixels == 2) {
 		vec2 x = uv * zoom / 1000.0 + vec2(center.x, -center.y);
 		COLOR = draw(initial_z, c_value, x);
 	} else {
