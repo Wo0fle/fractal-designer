@@ -31,8 +31,8 @@ func _process(delta):
 	var some_vector2 = Vector2(-2+time/10,1-time/10)
 	
 #	payneshorizons.get_material().set_shader_parameter(\"max_iterations\", 20/pow(zoom, 0.5))
-	payneshorizons.get_material().set_shader_parameter(\"zoom\", zoom)
-	payneshorizons.get_material().set_shader_parameter(\"c_value\", some_vector2)
+#	multibrot.get_material().set_shader_parameter(\"zoom\", zoom)
+	multibrot.get_material().set_shader_parameter(\"z_value\", some_vector2)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3t2ld"]
@@ -104,6 +104,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="burningships" type="ColorRect" parent="fractals"]
+visible = false
 material = SubResource("ShaderMaterial_ecohy")
 anchors_preset = 15
 anchor_right = 1.0
@@ -113,6 +114,7 @@ grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="payneshorizons" type="ColorRect" parent="fractals"]
+visible = false
 material = SubResource("ShaderMaterial_jl1gs")
 anchors_preset = 15
 anchor_right = 1.0
