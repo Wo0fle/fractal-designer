@@ -9,7 +9,6 @@ uniform vec2 x_value = vec2(2.0,0.0);
 uniform vec2 viewport_size;
 
 vec4 draw(vec2 z, vec2 c, vec2 x) {
-	float le = 0.0;
 	int iterations = 0;
 	
 	for (int i = 0; i < max_iterations; i++) {
@@ -19,23 +18,21 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 			z = c;
 		} else { // z_n+1 = z_n^x + c
 			float theta = atan(z.y,z.x);
-			if (use_lyapunov) { le += log(r); }
 			z = vec2(
 				pow(r,x.x)*exp(-x.y*theta)*cos((x.x*theta)+(x.y*log(r))),
 				pow(r,x.x)*exp(-x.y*theta)*sin((x.x*theta)+(x.y*log(r)))
 			) + c;
 		}
 		
-		if (length(z) > escape_value && !use_lyapunov) { break; }
+		if (length(z) > escape_value && use_escape_time_coloring) { break; }
 		iterations++;
 	}
-	if (use_lyapunov) { 
-		le += log(length(z)); // to cover that very last iteration
-		le /= float(max_iterations);
-		return vec4(color_getter_le(le), 1.0);
-	} else {
-		if (iterations == max_iterations) { return vec4(in_set_color/255.0, 1.0);
-		} else { return vec4(color_getter_et(iterations), 1.0); }
+	if (use_escape_time_coloring) {
+		if (iterations == max_iterations) {
+			return vec4(in_set_color/255.0, 1.0);
+		} else {
+			return vec4(color_getter_escape_time(iterations), 1.0);
+		}
 		
 	}
 }

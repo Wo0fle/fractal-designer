@@ -32,7 +32,7 @@ func _process(delta):
 	
 #	payneshorizons.get_material().set_shader_parameter(\"max_iterations\", 20/pow(zoom, 0.5))
 #	multibrot.get_material().set_shader_parameter(\"zoom\", zoom)
-	multibrot.get_material().set_shader_parameter(\"z_value\", some_vector2)
+#	multibrot.get_material().set_shader_parameter(\"z_value\", some_vector2)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3t2ld"]
@@ -44,9 +44,12 @@ shader_parameter/var_on_pixels = 0
 shader_parameter/zoom = 4.0
 shader_parameter/center = Vector2(0, 0)
 shader_parameter/rotation = 0.0
-shader_parameter/use_lyapunov = false
-shader_parameter/max_iterations = 500
+shader_parameter/use_period_coloring = false
+shader_parameter/max_period = 100
+shader_parameter/tolerance = 1e-05
+shader_parameter/use_escape_time_coloring = true
 shader_parameter/escape_value = 256.0
+shader_parameter/max_iterations = 500
 shader_parameter/in_set_color = Vector3(0, 0, 0)
 shader_parameter/far_color = Vector3(56, 95, 200)
 shader_parameter/close_color = Vector3(162, 240, 240)
@@ -55,39 +58,9 @@ shader_parameter/viewport_size = Vector2(0, 0)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ecohy"]
 shader = ExtResource("2_1tui1")
-shader_parameter/initial_z = Vector2(0, 0)
-shader_parameter/c_value = Vector2(0.3, -0.38)
-shader_parameter/x_value = Vector2(2, 0)
-shader_parameter/var_on_pixels = 0
-shader_parameter/zoom = 4.0
-shader_parameter/center = Vector2(0, 0)
-shader_parameter/rotation = 0.0
-shader_parameter/use_lyapunov = false
-shader_parameter/max_iterations = 500
-shader_parameter/escape_value = 256.0
-shader_parameter/in_set_color = Vector3(0, 0, 0)
-shader_parameter/far_color = Vector3(56, 95, 200)
-shader_parameter/close_color = Vector3(162, 240, 240)
-shader_parameter/amount_of_colors = 30
-shader_parameter/viewport_size = null
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_jl1gs"]
 shader = ExtResource("3_p1yma")
-shader_parameter/initial_z = Vector2(0, 0)
-shader_parameter/c_value = Vector2(0.3, -0.38)
-shader_parameter/x_value = Vector2(0, 1)
-shader_parameter/var_on_pixels = 1
-shader_parameter/zoom = 4.0
-shader_parameter/center = Vector2(0, 0)
-shader_parameter/rotation = 0.0
-shader_parameter/use_lyapunov = false
-shader_parameter/max_iterations = 200
-shader_parameter/escape_value = 256.0
-shader_parameter/in_set_color = Vector3(0, 0, 0)
-shader_parameter/far_color = Vector3(56, 95, 200)
-shader_parameter/close_color = Vector3(162, 240, 240)
-shader_parameter/amount_of_colors = 10
-shader_parameter/viewport_size = null
 
 [node name="viewer" type="Node2D"]
 script = SubResource("GDScript_tlstf")
