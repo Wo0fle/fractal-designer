@@ -4,7 +4,8 @@ uniform vec2 initial_z = vec2(0.0);
 uniform vec2 c_value = vec2(-1.15, 0.26);
 uniform vec2 x_value = vec2(2.0,0.0);
 
-#include "shared.gdshaderinc"
+#include "rendering.gdshaderinc"
+#include "complex_math.gdshaderinc"
 
 uniform vec2 viewport_size;
 
@@ -22,6 +23,7 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 				pow(r,x.x)*exp(-x.y*theta)*cos((x.x*theta)+(x.y*log(r))),
 				pow(r,x.x)*exp(-x.y*theta)*sin((x.x*theta)+(x.y*log(r)))
 			) + c;
+			//z = c_power(z,x) + c
 		}
 		
 		if (length(z) > escape_value && use_escape_time_coloring) { break; }

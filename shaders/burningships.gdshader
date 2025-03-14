@@ -4,7 +4,7 @@ uniform vec2 initial_z = vec2(0.0);
 uniform vec2 c_value = vec2(0.3, -0.38);
 uniform vec2 x_value = vec2(2.0,0.0);
 
-#include "shared.gdshaderinc"
+#include "rendering.gdshaderinc"
 
 uniform vec2 viewport_size;
 

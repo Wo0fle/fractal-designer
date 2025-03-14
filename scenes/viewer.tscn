@@ -37,7 +37,7 @@ func _process(delta):
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3t2ld"]
 shader = ExtResource("4_twjwl")
-shader_parameter/initial_z = Vector2(0, 0)
+shader_parameter/initial_z = Vector2(0.473, 0)
 shader_parameter/c_value = Vector2(-1.15, 0.26)
 shader_parameter/x_value = Vector2(2, 0)
 shader_parameter/var_on_pixels = 0
