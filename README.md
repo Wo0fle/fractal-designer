@@ -1,4 +1,4 @@
-# Fractal Designer LITE
+# Fractal Designer
 
 ### Explore fractals with this highly customizable web app!
 
