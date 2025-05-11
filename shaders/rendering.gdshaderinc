@@ -29,14 +29,14 @@ vec3 color_getter_escape_time(int cur_iteration) {
 	// for that reason, when Re(x) <= 1, the image generated is technically inaccurate
 	// this is also true for when Im(x) != 0,
 	// however, with a big enough escape radius, it looks fine
-	
+
 	vec3 far = far_color/255.0;
 	vec3 close = close_color/255.0;
 
 	vec3 color_difference = (close - far)/float(amount_of_colors);
 	vec3 cur_color = far;
-	
+
 	cur_color += color_difference*float(cur_iteration % amount_of_colors);
-	
+
 	return cur_color;
 }

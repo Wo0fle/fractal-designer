@@ -16,9 +16,20 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 		if (length(z) == 0.0) {
 			z = c;
 		} else {
+			// mandelbrot: 
 			z = c_pow(z,x) + c;
-			// burning ships:
-			//z = c_pow(vec2(abs(z.x),abs(z.y)),x) + c;
+			// burning ship: z = c_pow(vec2(abs(z.x),abs(z.y)),x) + c;
+			// broken heart: z = c_pow(z,x) - c_multiply(c,i_vec);
+			// platypus: z = c_pow(vec2(z.x,abs(z.y)),x) + c;
+			// mandelbar: z = c_pow(c_conjugate(z),x) + c;
+			// torbledman: z = c_pow(x,z) + c;
+			// feather: z = c_divide(c_pow(z,x),one_vec+vec2(pow(z.x,2.0),pow(z.y,2.0))) + c;
+				// SFX: z = pow(length(z),2.0)*z - c_multiply(z,vec2(pow(c.x,2.0),pow(c.y,2.0)));
+				// standard map: z = vec2(z.x+c.x*(z.y+c.y*sin(z.x)),z.y+c.y*sin(z.x));
+				// henon map: z = vec2(1.0-(c.x*pow(z.x,2.0))+z.y,c.y*z.x);
+				// duffing map: z = vec2(z.y,-c.y*z.x+c.x*z.y-pow(z.y,3.0));
+				// ikeda map: z = vec2(1.0+c.x*(z.x*cos(0.4-(6.0/(1.0+pow(length(z),2))))-z.y*sin(0.4-(6.0/(1.0+pow(length(z),2))))),c.y*(z.x*sin(0.4-(6.0/(1.0+pow(length(z),2))))+z.y*cos(0.4-(6.0/(1.0+pow(length(z),2))))));
+			// gauss map: z = c_exp(-c.x*c_pow(z,x)) + c.y;
 		}
 		
 		if (length(z) > escape_value && use_escape_time_coloring) { break; }
@@ -30,7 +41,6 @@ vec4 draw(vec2 z, vec2 c, vec2 x) {
 		} else {
 			return vec4(color_getter_escape_time(iterations), 1.0);
 		}
-		
 	}
 }
 
