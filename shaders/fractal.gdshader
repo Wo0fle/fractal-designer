@@ -48,14 +48,13 @@ void fragment() {
 	vec2 uv = FRAGCOORD.xy - viewport_size/2.0;
 	vec2 rot_vec = vec2(cos(rotation*PI/180.0), sin(rotation*PI/180.0));
 	
+	vec2 param = c_multiply(uv/(250.0*pow(sqrt(zoom),zoom)), rot_vec) + vec2(center.x, -center.y);
+	
 	if (var_on_pixels == 1) {
-		vec2 z = c_multiply(uv * zoom / 1000.0, rot_vec) + vec2(center.x, -center.y);
-		COLOR = draw(z, c_value, x_value);
+		COLOR = draw(param, c_value, x_value);
 	} else if (var_on_pixels == 2) {
-		vec2 x = c_multiply(uv * zoom / 1000.0, rot_vec) + vec2(center.x, -center.y);
-		COLOR = draw(initial_z, c_value, x);
+		COLOR = draw(initial_z, c_value, param);
 	} else {
-		vec2 c = c_multiply(uv * zoom / 1000.0, rot_vec) + vec2(center.x, -center.y);
-		COLOR = draw(initial_z, c, x_value);
+		COLOR = draw(initial_z, param, x_value);
 	}
 }

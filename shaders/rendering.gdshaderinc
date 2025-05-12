@@ -1,6 +1,6 @@
 uniform int var_on_pixels = 0;
 
-uniform float zoom = 4.0;
+uniform float zoom = 1.0;
 uniform vec2 center = vec2(0.0);
 uniform float rotation = 0.0;
 
