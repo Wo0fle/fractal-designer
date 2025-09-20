@@ -1,4 +1,5 @@
 // this is where i will house all the complex operations that can be done
+// i^2=-1
 
 // basis vectors: i and 1
 const vec2 i_vec = vec2(0.0,1.0);
@@ -9,12 +10,13 @@ vec2 c_multiply(vec2 z1, vec2 z2) {
 	return vec2(z1.x*z2.x-z1.y*z2.y, z1.x*z2.y+z1.y*z2.x);
 }
 
-vec2 c_invert(vec2 z) {
+vec2 c_reciprocal(vec2 z) {
 	return vec2(z.x/(pow(length(z),2)), -z.y/(pow(length(z),2)));
 }
 
 vec2 c_divide(vec2 z1, vec2 z2) {
-	return c_multiply(z1, c_invert(z2));
+	return vec2((z1.x*z2.x+z1.y*z2.y)/(pow(length(z2),2)),(z1.y*z2.x-z1.x*z2.y)/(pow(length(z2),2)));
+	//return c_multiply(z1,c_reciprocal(z2));
 }
 
 vec2 c_conjugate(vec2 z) {

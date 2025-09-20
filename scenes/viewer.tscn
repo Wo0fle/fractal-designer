@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dhlgkm0cdgaa4"]
+[gd_scene load_steps=6 format=3 uid="uid://dhlgkm0cdgaa4"]
 
-[ext_resource type="Shader" uid="uid://dpbnx2ewhyvo3" path="res://shaders/fractal.gdshader" id="4_twjwl"]
+[ext_resource type="Shader" uid="uid://dpbnx2ewhyvo3" path="res://shaders/complex/fractal_complex.gdshader" id="1_5fyfc"]
+[ext_resource type="Shader" uid="uid://bsk84phieeka0" path="res://shaders/dual/fractal_dual.gdshader" id="2_bv3ft"]
 
 [sub_resource type="GDScript" id="GDScript_tlstf"]
 script/source = "extends Node2D
 
 
-@onready var canvas = $\"fractals/canvas\"
+@onready var canvas_complex = $\"fractals/canvas_complex\"
+@onready var canvas_dual = $\"fractals/canvas_dual\"
 
 var time = 0.0
 
@@ -15,7 +17,8 @@ func _ready():
 	_on_viewport_size_changed()
 
 func _on_viewport_size_changed():
-	canvas.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
+	canvas_complex.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
+	canvas_dual.get_material().set_shader_parameter(\"viewport_size\", get_viewport_rect().size)
 
 func _process(_delta):
 	pass
@@ -24,13 +27,13 @@ func _process(_delta):
 	#var zoom = 200/pow(time, sqrt(time/15))
 	#var some_vector2 = Vector2(-2+time/10,1-time/10)
 	
-#	canvas.get_material().set_shader_parameter(\"max_iterations\", 20/pow(zoom, 0.5))
-#	canvas.get_material().set_shader_parameter(\"zoom\", zoom)
-#	canvas.get_material().set_shader_parameter(\"z_value\", some_vector2)
+#	canvas_complex.get_material().set_shader_parameter(\"max_iterations\", 20/pow(zoom, 0.5))
+#	canvas_complex.get_material().set_shader_parameter(\"zoom\", zoom)
+#	canvas_complex.get_material().set_shader_parameter(\"z_value\", some_vector2)
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3t2ld"]
-shader = ExtResource("4_twjwl")
+shader = ExtResource("1_5fyfc")
 shader_parameter/initial_z = Vector2(0, 0)
 shader_parameter/c_value = Vector2(-1.15, 0.26)
 shader_parameter/x_value = Vector2(2, 0)
@@ -50,13 +53,26 @@ shader_parameter/close_color = Vector3(162, 240, 240)
 shader_parameter/amount_of_colors = 30
 shader_parameter/viewport_size = Vector2(0, 0)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6g80n"]
+shader = ExtResource("2_bv3ft")
+
 [node name="viewer" type="Node2D"]
 script = SubResource("GDScript_tlstf")
 
 [node name="fractals" type="CanvasLayer" parent="."]
 
-[node name="canvas" type="ColorRect" parent="fractals"]
+[node name="canvas_complex" type="ColorRect" parent="fractals"]
 material = SubResource("ShaderMaterial_3t2ld")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="canvas_dual" type="ColorRect" parent="fractals"]
+visible = false
+material = SubResource("ShaderMaterial_6g80n")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
